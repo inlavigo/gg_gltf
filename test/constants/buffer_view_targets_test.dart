@@ -8,11 +8,13 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('GgGltf()', () {
-    group('foo()', () {
-      test('should return foo', () async {
-        const ggGltf = GgGltf();
-        expect(ggGltf.foo(), 'foo');
+  group('BufferViewTargets', () {
+    group('example', () {
+      test('should work', () {
+        final bufferViewTargets = BufferViewTargets();
+        expect(bufferViewTargets, isNotNull);
+        expect(BufferViewTargets.arrayBuffer, 34962);
+        expect(BufferViewTargets.elementArrayBuffer, 34963);
       });
     });
   });
