@@ -7,11 +7,11 @@
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'node.g.dart';
+part 'node_json.g.dart';
 
 /// A node in the node hierarchy.
 @JsonSerializable()
-class Node {
+class NodeJson {
   /// The name of the node.
   final String? name;
 
@@ -22,18 +22,19 @@ class Node {
   final int? mesh;
 
   /// Node constructor
-  const Node({this.name, this.children, this.mesh});
+  const NodeJson({this.name, this.children, this.mesh});
 
-  /// Creates a new [Node] from a json map.
-  factory Node.fromJson(Map<String, dynamic> json) => _$NodeFromJson(json);
+  /// Creates a new [NodeJson] from a json map.
+  factory NodeJson.fromJson(Map<String, dynamic> json) =>
+      _$NodeJsonFromJson(json);
 
-  /// Converts this [Node] to a json map.
-  Map<String, dynamic> toJson() => _$NodeToJson(this);
+  /// Converts this [NodeJson] to a json map.
+  Map<String, dynamic> toJson() => _$NodeJsonToJson(this);
 
   @override
   bool operator ==(Object other) {
-    if (other is! Node) return false;
-    Node node = other;
+    if (other is! NodeJson) return false;
+    NodeJson node = other;
     return node.name == name && node.children == children && node.mesh == mesh;
   }
 
@@ -44,6 +45,6 @@ class Node {
       mesh.hashCode;
 
   // ...........................................................................
-  /// Returns an example [Node] instance for test purposes.
-  static Node get example => Gltf.example.nodes![0];
+  /// Returns an example [NodeJson] instance for test purposes.
+  static NodeJson get example => GltfJson.example.nodes![0];
 }

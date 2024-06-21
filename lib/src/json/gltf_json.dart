@@ -10,13 +10,13 @@ import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'gltf.g.dart';
+part 'gltf_json.g.dart';
 
 /// The main entry point for the glTF 2.0 file format.
 @JsonSerializable()
-class Gltf {
+class GltfJson {
   /// Metadata about the glTF asset.
-  const Gltf({
+  const GltfJson({
     required this.asset,
     this.scenes,
     this.nodes,
@@ -26,45 +26,46 @@ class Gltf {
     this.accessors,
   });
 
-  /// Creates a new [Gltf] from a json map.
-  factory Gltf.fromJson(Map<String, dynamic> json) => _$GltfFromJson(json);
+  /// Creates a new [GltfJson] from a json map.
+  factory GltfJson.fromJson(Map<String, dynamic> json) =>
+      _$GltfJsonFromJson(json);
 
-  /// Converts this [Gltf] to a json map.
-  Map<String, dynamic> toJson() => _$GltfToJson(this);
+  /// Converts this [GltfJson] to a json map.
+  Map<String, dynamic> toJson() => _$GltfJsonToJson(this);
 
   /// Metadata about the glTF asset.
-  final Asset asset;
+  final AssetJson asset;
 
   /// A list of scenes.
-  final List<Scene>? scenes;
+  final List<SceneJson>? scenes;
 
   /// A list of nodes.
-  final List<Node>? nodes;
+  final List<NodeJson>? nodes;
 
   /// A list of meshes.
-  final List<Mesh>? meshes;
+  final List<MeshJson>? meshes;
 
   /// A list of buffers.
-  final List<Buffer>? buffers;
+  final List<BufferJson>? buffers;
 
   /// A list of bufferViews.
-  final List<BufferView>? bufferViews;
+  final List<BufferViewJson>? bufferViews;
 
   /// A list of accessors.
-  final List<Accessor>? accessors;
+  final List<AccessorJson>? accessors;
 
   @override
   bool operator ==(Object other) {
-    if (other is! Gltf) return false;
-    Gltf gltf = other;
+    if (other is! GltfJson) return false;
+    GltfJson gltf = other;
     return gltf.asset == asset &&
-        const ListEquality<Scene>().equals(gltf.scenes, scenes) &&
-        const ListEquality<Node>().equals(gltf.nodes, nodes) &&
-        const ListEquality<Mesh>().equals(gltf.meshes, meshes) &&
-        const ListEquality<Buffer>().equals(gltf.buffers, buffers) &&
-        const ListEquality<BufferView>()
+        const ListEquality<SceneJson>().equals(gltf.scenes, scenes) &&
+        const ListEquality<NodeJson>().equals(gltf.nodes, nodes) &&
+        const ListEquality<MeshJson>().equals(gltf.meshes, meshes) &&
+        const ListEquality<BufferJson>().equals(gltf.buffers, buffers) &&
+        const ListEquality<BufferViewJson>()
             .equals(gltf.bufferViews, bufferViews) &&
-        const ListEquality<Accessor>().equals(gltf.accessors, accessors);
+        const ListEquality<AccessorJson>().equals(gltf.accessors, accessors);
   }
 
   @override
@@ -79,9 +80,9 @@ class Gltf {
 
   // ...........................................................................
   /// Returns an example glTF instance
-  static Gltf get example => _example;
+  static GltfJson get example => _example;
 }
 
-Gltf _example = Gltf.fromJson(
+GltfJson _example = GltfJson.fromJson(
   jsonDecode(exampleJson) as Map<String, dynamic>,
 );

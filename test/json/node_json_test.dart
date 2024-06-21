@@ -10,20 +10,20 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final accessor = Accessor.example;
+  final node = NodeJson.example;
 
-  group('Accessor', () {
+  group('Node', () {
     group('example', () {
       test('should work', () {
-        expect(accessor, isNotNull);
+        expect(node, isNotNull);
       });
     });
 
     group('fromJson, toJson', () {
       test('should work', () {
-        final a = accessor;
+        final a = node;
         final json = jsonEncode(a.toJson());
-        final b = Accessor.fromJson(
+        final b = NodeJson.fromJson(
           jsonDecode(json) as Map<String, dynamic>,
         );
         expect(a, b);

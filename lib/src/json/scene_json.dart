@@ -8,34 +8,35 @@ import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'scene.g.dart';
+part 'scene_json.g.dart';
 
 /// The root nodes of a scene.
 @JsonSerializable()
-class Scene {
+class SceneJson {
   /// The root nodes of a scene.
   final List<int> nodes;
 
   /// Scene constructor
-  const Scene({required this.nodes});
+  const SceneJson({required this.nodes});
 
-  /// Creates a new [Scene] from a json map.
-  factory Scene.fromJson(Map<String, dynamic> json) => _$SceneFromJson(json);
+  /// Creates a new [SceneJson] from a json map.
+  factory SceneJson.fromJson(Map<String, dynamic> json) =>
+      _$SceneJsonFromJson(json);
 
   @override
   bool operator ==(Object other) {
-    if (other is! Scene) return false;
-    Scene scene = other;
+    if (other is! SceneJson) return false;
+    SceneJson scene = other;
     return const ListEquality<int>().equals(scene.nodes, other.nodes);
   }
 
   @override
   int get hashCode => Object.hashAll(nodes);
 
-  /// Converts this [Scene] to a json map.
-  Map<String, dynamic> toJson() => _$SceneToJson(this);
+  /// Converts this [SceneJson] to a json map.
+  Map<String, dynamic> toJson() => _$SceneJsonToJson(this);
 
   // ...........................................................................
-  /// Returns an example [Scene] instance for test purposes.
-  static Scene get example => Gltf.example.scenes![0];
+  /// Returns an example [SceneJson] instance for test purposes.
+  static SceneJson get example => GltfJson.example.scenes![0];
 }

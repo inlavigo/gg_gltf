@@ -8,11 +8,11 @@ import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'primitive.g.dart';
+part 'primitive_json.g.dart';
 
 /// Geometry to be rendered with the given material.
 @JsonSerializable()
-class Primitive {
+class PrimitiveJson {
   /// A dictionary object, where each key corresponds to mesh attribute semantic
   final Map<String, int> attributes;
 
@@ -26,7 +26,7 @@ class Primitive {
   final int mode;
 
   /// Primitive constructor
-  const Primitive({
+  const PrimitiveJson({
     required this.attributes,
     this.indices,
     this.material,
@@ -35,8 +35,8 @@ class Primitive {
 
   @override
   bool operator ==(Object other) {
-    if (other is! Primitive) return false;
-    Primitive primitive = other;
+    if (other is! PrimitiveJson) return false;
+    PrimitiveJson primitive = other;
     return const MapEquality<String, int>()
             .equals(primitive.attributes, attributes) &&
         primitive.indices == indices &&
@@ -52,14 +52,14 @@ class Primitive {
       material.hashCode ^
       mode.hashCode;
 
-  /// Creates a new [Primitive] from a json map.
-  factory Primitive.fromJson(Map<String, dynamic> json) =>
-      _$PrimitiveFromJson(json);
+  /// Creates a new [PrimitiveJson] from a json map.
+  factory PrimitiveJson.fromJson(Map<String, dynamic> json) =>
+      _$PrimitiveJsonFromJson(json);
 
-  /// Converts this [Primitive] to a json map.
-  Map<String, dynamic> toJson() => _$PrimitiveToJson(this);
+  /// Converts this [PrimitiveJson] to a json map.
+  Map<String, dynamic> toJson() => _$PrimitiveJsonToJson(this);
 
   // ...........................................................................
-  /// Returns an example [Primitive] instance for test purposes.
-  static Primitive get example => Gltf.example.meshes![0].primitives[0];
+  /// Returns an example [PrimitiveJson] instance for test purposes.
+  static PrimitiveJson get example => GltfJson.example.meshes![0].primitives[0];
 }

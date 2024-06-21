@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'accessor.dart';
+part of 'accessor_json.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Accessor _$AccessorFromJson(Map<String, dynamic> json) => Accessor(
+AccessorJson _$AccessorJsonFromJson(Map<String, dynamic> json) => AccessorJson(
       bufferView: (json['bufferView'] as num).toInt(),
       byteOffset: (json['byteOffset'] as num).toInt(),
       componentType: (json['componentType'] as num).toInt(),
@@ -14,7 +14,8 @@ Accessor _$AccessorFromJson(Map<String, dynamic> json) => Accessor(
       type: json['type'] as String,
     );
 
-Map<String, dynamic> _$AccessorToJson(Accessor instance) => <String, dynamic>{
+Map<String, dynamic> _$AccessorJsonToJson(AccessorJson instance) =>
+    <String, dynamic>{
       'bufferView': instance.bufferView,
       'byteOffset': instance.byteOffset,
       'componentType': instance.componentType,

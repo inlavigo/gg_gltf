@@ -7,11 +7,11 @@
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'buffer.g.dart';
+part 'buffer_json.g.dart';
 
 /// A buffer points to binary geometry, animation, or skins.
 @JsonSerializable()
-class Buffer {
+class BufferJson {
   /// The uri of the buffer.
   final String uri;
 
@@ -19,18 +19,19 @@ class Buffer {
   final int byteLength;
 
   /// Buffer constructor
-  const Buffer({required this.uri, required this.byteLength});
+  const BufferJson({required this.uri, required this.byteLength});
 
-  /// Creates a new [Buffer] from a json map.
-  factory Buffer.fromJson(Map<String, dynamic> json) => _$BufferFromJson(json);
+  /// Creates a new [BufferJson] from a json map.
+  factory BufferJson.fromJson(Map<String, dynamic> json) =>
+      _$BufferJsonFromJson(json);
 
-  /// Converts this [Buffer] to a json map.
-  Map<String, dynamic> toJson() => _$BufferToJson(this);
+  /// Converts this [BufferJson] to a json map.
+  Map<String, dynamic> toJson() => _$BufferJsonToJson(this);
 
   @override
   bool operator ==(Object other) {
-    if (other is! Buffer) return false;
-    Buffer buffer = other;
+    if (other is! BufferJson) return false;
+    BufferJson buffer = other;
     return buffer.uri == uri && buffer.byteLength == byteLength;
   }
 
@@ -38,6 +39,6 @@ class Buffer {
   int get hashCode => uri.hashCode ^ byteLength.hashCode;
 
   // ...........................................................................
-  /// Returns an example [Buffer] instance for test purposes.
-  static Buffer get example => Gltf.example.buffers![0];
+  /// Returns an example [BufferJson] instance for test purposes.
+  static BufferJson get example => GltfJson.example.buffers![0];
 }

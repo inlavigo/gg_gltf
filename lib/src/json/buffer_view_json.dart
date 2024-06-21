@@ -7,11 +7,11 @@
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'buffer_view.g.dart';
+part 'buffer_view_json.g.dart';
 
 /// A view into a buffer.
 @JsonSerializable()
-class BufferView {
+class BufferViewJson {
   /// The index of the buffer.
   final int buffer;
 
@@ -25,7 +25,7 @@ class BufferView {
   final int? byteStride;
 
   /// BufferView constructor
-  const BufferView({
+  const BufferViewJson({
     required this.buffer,
     required this.byteOffset,
     required this.byteLength,
@@ -34,8 +34,8 @@ class BufferView {
 
   @override
   bool operator ==(Object other) {
-    if (other is! BufferView) return false;
-    BufferView bufferView = other;
+    if (other is! BufferViewJson) return false;
+    BufferViewJson bufferView = other;
     return bufferView.buffer == buffer &&
         bufferView.byteOffset == byteOffset &&
         bufferView.byteLength == byteLength &&
@@ -49,14 +49,14 @@ class BufferView {
       byteLength.hashCode ^
       byteStride.hashCode;
 
-  /// Creates a new [BufferView] from a json map.
-  factory BufferView.fromJson(Map<String, dynamic> json) =>
-      _$BufferViewFromJson(json);
+  /// Creates a new [BufferViewJson] from a json map.
+  factory BufferViewJson.fromJson(Map<String, dynamic> json) =>
+      _$BufferViewJsonFromJson(json);
 
-  /// Converts this [BufferView] to a json map.
-  Map<String, dynamic> toJson() => _$BufferViewToJson(this);
+  /// Converts this [BufferViewJson] to a json map.
+  Map<String, dynamic> toJson() => _$BufferViewJsonToJson(this);
 
   // ...........................................................................
-  /// Returns an example [BufferView] instance for test purposes.
-  static BufferView get example => Gltf.example.bufferViews![1];
+  /// Returns an example [BufferViewJson] instance for test purposes.
+  static BufferViewJson get example => GltfJson.example.bufferViews![1];
 }

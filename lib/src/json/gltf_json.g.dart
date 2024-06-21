@@ -1,34 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gltf.dart';
+part of 'gltf_json.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Gltf _$GltfFromJson(Map<String, dynamic> json) => Gltf(
-      asset: Asset.fromJson(json['asset'] as Map<String, dynamic>),
+GltfJson _$GltfJsonFromJson(Map<String, dynamic> json) => GltfJson(
+      asset: AssetJson.fromJson(json['asset'] as Map<String, dynamic>),
       scenes: (json['scenes'] as List<dynamic>?)
-          ?.map((e) => Scene.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => SceneJson.fromJson(e as Map<String, dynamic>))
           .toList(),
       nodes: (json['nodes'] as List<dynamic>?)
-          ?.map((e) => Node.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => NodeJson.fromJson(e as Map<String, dynamic>))
           .toList(),
       meshes: (json['meshes'] as List<dynamic>?)
-          ?.map((e) => Mesh.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MeshJson.fromJson(e as Map<String, dynamic>))
           .toList(),
       buffers: (json['buffers'] as List<dynamic>?)
-          ?.map((e) => Buffer.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => BufferJson.fromJson(e as Map<String, dynamic>))
           .toList(),
       bufferViews: (json['bufferViews'] as List<dynamic>?)
-          ?.map((e) => BufferView.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => BufferViewJson.fromJson(e as Map<String, dynamic>))
           .toList(),
       accessors: (json['accessors'] as List<dynamic>?)
-          ?.map((e) => Accessor.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AccessorJson.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$GltfToJson(Gltf instance) => <String, dynamic>{
+Map<String, dynamic> _$GltfJsonToJson(GltfJson instance) => <String, dynamic>{
       'asset': instance.asset,
       'scenes': instance.scenes,
       'nodes': instance.nodes,

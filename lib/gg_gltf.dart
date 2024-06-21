@@ -11,16 +11,16 @@ export 'src/constants/buffer_view_targets.dart';
 export 'src/constants/component_types.dart';
 export 'src/constants/render_modes.dart';
 
-export 'src/json/accessor.dart';
-export 'src/json/asset.dart';
-export 'src/json/buffer_view.dart';
-export 'src/json/buffer.dart';
+export 'src/json/accessor_json.dart';
+export 'src/json/asset_json.dart';
+export 'src/json/buffer_view_json.dart';
+export 'src/json/buffer_json.dart';
 export 'src/json/example_json.dart';
-export 'src/json/gltf.dart';
-export 'src/json/mesh.dart';
-export 'src/json/node.dart';
-export 'src/json/primitive.dart';
-export 'src/json/scene.dart';
+export 'src/json/gltf_json.dart';
+export 'src/json/mesh_json.dart';
+export 'src/json/node_json.dart';
+export 'src/json/primitive_json.dart';
+export 'src/json/scene_json.dart';
 
 // Implement later:
 

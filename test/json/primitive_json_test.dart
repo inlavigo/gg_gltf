@@ -10,20 +10,20 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Scene', () {
-    final scene = Scene.example;
+  group('Primitive', () {
+    final primitive = PrimitiveJson.example;
 
     group('example', () {
       test('should work', () {
-        expect(scene, isNotNull);
+        expect(primitive, isNotNull);
       });
     });
 
     group('fromJson, toJson', () {
       test('should work', () {
-        final a = scene;
+        final a = primitive;
         final json = jsonEncode(a.toJson());
-        final b = Scene.fromJson(
+        final b = PrimitiveJson.fromJson(
           jsonDecode(json) as Map<String, dynamic>,
         );
         expect(a, b);

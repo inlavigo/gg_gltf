@@ -10,20 +10,19 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final node = Node.example;
-
-  group('Node', () {
+  group('Buffer', () {
+    final buffer = BufferJson.example;
     group('example', () {
       test('should work', () {
-        expect(node, isNotNull);
+        expect(buffer, isNotNull);
       });
     });
 
     group('fromJson, toJson', () {
       test('should work', () {
-        final a = node;
+        final a = buffer;
         final json = jsonEncode(a.toJson());
-        final b = Node.fromJson(
+        final b = BufferJson.fromJson(
           jsonDecode(json) as Map<String, dynamic>,
         );
         expect(a, b);

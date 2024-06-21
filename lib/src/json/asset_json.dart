@@ -6,11 +6,11 @@
 
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'asset.g.dart';
+part 'asset_json.g.dart';
 
 /// Metadata about the glTF asset.
 @JsonSerializable()
-class Asset {
+class AssetJson {
   /// The glTF version.
   final String version;
 
@@ -18,18 +18,19 @@ class Asset {
   final String? generator;
 
   /// Asset constructor
-  const Asset({required this.version, this.generator});
+  const AssetJson({required this.version, this.generator});
 
-  /// Creates a new [Asset] from a json map.
-  factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
+  /// Creates a new [AssetJson] from a json map.
+  factory AssetJson.fromJson(Map<String, dynamic> json) =>
+      _$AssetJsonFromJson(json);
 
-  /// Converts this [Asset] to a json map.
-  Map<String, dynamic> toJson() => _$AssetToJson(this);
+  /// Converts this [AssetJson] to a json map.
+  Map<String, dynamic> toJson() => _$AssetJsonToJson(this);
 
   @override
   bool operator ==(Object other) {
-    if (other is! Asset) return false;
-    Asset asset = other;
+    if (other is! AssetJson) return false;
+    AssetJson asset = other;
     return asset.version == version && asset.generator == generator;
   }
 
@@ -37,6 +38,6 @@ class Asset {
   int get hashCode => version.hashCode ^ generator.hashCode;
 
   // ...........................................................................
-  /// Returns an example [Asset] instance for test purposes.
-  static Asset get example => Gltf.example.asset;
+  /// Returns an example [AssetJson] instance for test purposes.
+  static AssetJson get example => GltfJson.example.asset;
 }

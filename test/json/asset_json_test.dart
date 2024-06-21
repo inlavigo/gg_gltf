@@ -10,7 +10,7 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final asset = Asset.example;
+  final asset = AssetJson.example;
 
   group('Asset', () {
     group('example', () {
@@ -23,7 +23,7 @@ void main() {
       test('should work', () {
         final a = asset;
         final json = jsonEncode(a.toJson());
-        final b = Asset.fromJson(
+        final b = AssetJson.fromJson(
           jsonDecode(json) as Map<String, dynamic>,
         );
         expect(a, b);

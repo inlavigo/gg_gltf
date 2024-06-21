@@ -7,11 +7,11 @@
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'accessor.g.dart';
+part 'accessor_json.g.dart';
 
 /// A typed view into a bufferView.
 @JsonSerializable()
-class Accessor {
+class AccessorJson {
   /// The index of the bufferView.
   final int bufferView;
 
@@ -28,7 +28,7 @@ class Accessor {
   final String type;
 
   /// Accessor constructor
-  const Accessor({
+  const AccessorJson({
     required this.bufferView,
     required this.byteOffset,
     required this.componentType,
@@ -36,20 +36,20 @@ class Accessor {
     required this.type,
   });
 
-  /// Creates a new [Accessor] from a json map.
-  factory Accessor.fromJson(Map<String, dynamic> json) =>
-      _$AccessorFromJson(json);
+  /// Creates a new [AccessorJson] from a json map.
+  factory AccessorJson.fromJson(Map<String, dynamic> json) =>
+      _$AccessorJsonFromJson(json);
 
-  /// Converts this [Accessor] to a json map.
-  Map<String, dynamic> toJson() => _$AccessorToJson(this);
+  /// Converts this [AccessorJson] to a json map.
+  Map<String, dynamic> toJson() => _$AccessorJsonToJson(this);
 
-  /// Returns an example [Accessor] instance
-  static Accessor get example => Gltf.example.accessors![0];
+  /// Returns an example [AccessorJson] instance
+  static AccessorJson get example => GltfJson.example.accessors![0];
 
   @override
   bool operator ==(Object other) {
-    if (other is! Accessor) return false;
-    Accessor accessor = other;
+    if (other is! AccessorJson) return false;
+    AccessorJson accessor = other;
     return accessor.bufferView == bufferView &&
         accessor.byteOffset == byteOffset &&
         accessor.componentType == componentType &&

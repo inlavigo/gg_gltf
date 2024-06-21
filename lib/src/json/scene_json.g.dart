@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'scene.dart';
+part of 'scene_json.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Scene _$SceneFromJson(Map<String, dynamic> json) => Scene(
+SceneJson _$SceneJsonFromJson(Map<String, dynamic> json) => SceneJson(
       nodes: (json['nodes'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
     );
 
-Map<String, dynamic> _$SceneToJson(Scene instance) => <String, dynamic>{
+Map<String, dynamic> _$SceneJsonToJson(SceneJson instance) => <String, dynamic>{
       'nodes': instance.nodes,
     };

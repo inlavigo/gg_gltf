@@ -13,15 +13,15 @@ void main() {
   group('Gltf', () {
     group('example', () {
       test('should work', () {
-        final gltf = Gltf.example;
+        final gltf = GltfJson.example;
         expect(gltf, isNotNull);
       });
     });
 
     test('toJson, fromJson', () {
-      final a = Gltf.example;
+      final a = GltfJson.example;
       final json = jsonEncode(a.toJson());
-      final b = Gltf.fromJson(jsonDecode(json) as Map<String, dynamic>);
+      final b = GltfJson.fromJson(jsonDecode(json) as Map<String, dynamic>);
       expect(a.asset, isNotNull);
       expect(a.scenes, isNotNull);
       expect(a.nodes, isNotNull);

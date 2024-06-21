@@ -8,38 +8,39 @@ import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'mesh.g.dart';
+part 'mesh_json.g.dart';
 
 /// A set of primitives to be rendered.
 @JsonSerializable()
-class Mesh {
+class MeshJson {
   /// The name of the mesh.
   final String? name;
 
   /// A set of primitives to be rendered.
-  final List<Primitive> primitives;
+  final List<PrimitiveJson> primitives;
 
   /// Mesh constructor
-  const Mesh({this.name, required this.primitives});
+  const MeshJson({this.name, required this.primitives});
 
-  /// Creates a new [Mesh] from a json map.
-  factory Mesh.fromJson(Map<String, dynamic> json) => _$MeshFromJson(json);
+  /// Creates a new [MeshJson] from a json map.
+  factory MeshJson.fromJson(Map<String, dynamic> json) =>
+      _$MeshJsonFromJson(json);
 
-  /// Converts this [Mesh] to a json map.
-  Map<String, dynamic> toJson() => _$MeshToJson(this);
+  /// Converts this [MeshJson] to a json map.
+  Map<String, dynamic> toJson() => _$MeshJsonToJson(this);
 
   @override
   bool operator ==(Object other) {
-    if (other is! Mesh) return false;
-    Mesh mesh = other;
+    if (other is! MeshJson) return false;
+    MeshJson mesh = other;
     return mesh.name == name &&
-        const ListEquality<Primitive>().equals(mesh.primitives, primitives);
+        const ListEquality<PrimitiveJson>().equals(mesh.primitives, primitives);
   }
 
   @override
   int get hashCode => name.hashCode ^ Object.hashAll(primitives);
 
   // ...........................................................................
-  /// Returns an example [Mesh] instance for test purposes.
-  static Mesh get example => Gltf.example.meshes![0];
+  /// Returns an example [MeshJson] instance for test purposes.
+  static MeshJson get example => GltfJson.example.meshes![0];
 }

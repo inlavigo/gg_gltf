@@ -10,20 +10,20 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Mesh', () {
-    final mesh = Mesh.example;
+  group('Scene', () {
+    final scene = SceneJson.example;
 
     group('example', () {
       test('should work', () {
-        expect(mesh, isNotNull);
+        expect(scene, isNotNull);
       });
     });
 
     group('fromJson, toJson', () {
       test('should work', () {
-        final a = mesh;
+        final a = scene;
         final json = jsonEncode(a.toJson());
-        final b = Mesh.fromJson(
+        final b = SceneJson.fromJson(
           jsonDecode(json) as Map<String, dynamic>,
         );
         expect(a, b);

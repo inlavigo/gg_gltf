@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'node.dart';
+part of 'node_json.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Node _$NodeFromJson(Map<String, dynamic> json) => Node(
+NodeJson _$NodeJsonFromJson(Map<String, dynamic> json) => NodeJson(
       name: json['name'] as String?,
       children: (json['children'] as List<dynamic>?)
           ?.map((e) => (e as num).toInt())
@@ -14,7 +14,7 @@ Node _$NodeFromJson(Map<String, dynamic> json) => Node(
       mesh: (json['mesh'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$NodeToJson(Node instance) => <String, dynamic>{
+Map<String, dynamic> _$NodeJsonToJson(NodeJson instance) => <String, dynamic>{
       'name': instance.name,
       'children': instance.children,
       'mesh': instance.mesh,

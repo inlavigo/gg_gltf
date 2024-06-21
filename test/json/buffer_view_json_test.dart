@@ -11,15 +11,15 @@ void main() {
   group('BufferView', () {
     group('example', () {
       test('should work', () {
-        final bufferView = BufferView.example;
+        final bufferView = BufferViewJson.example;
         expect(bufferView, isNotNull);
       });
     });
 
     test('fromJson, toJson', () {
-      final a = BufferView.example;
+      final a = BufferViewJson.example;
       final json = a.toJson();
-      final b = BufferView.fromJson(json);
+      final b = BufferViewJson.fromJson(json);
       expect(a, b);
       expect(a.hashCode, b.hashCode);
     });

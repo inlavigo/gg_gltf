@@ -9,8 +9,8 @@ import 'dart:convert';
 import 'package:gg_gltf/gg_gltf.dart';
 
 void main() {
-  final gltf = Gltf.example;
+  final gltf = GltfJson.example;
   final json = jsonEncode(gltf.toJson());
-  final gltf2 = Gltf.fromJson(jsonDecode(json) as Map<String, dynamic>);
+  final gltf2 = GltfJson.fromJson(jsonDecode(json) as Map<String, dynamic>);
   assert(gltf == gltf2);
 }
