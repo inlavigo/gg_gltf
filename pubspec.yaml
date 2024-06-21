@@ -1,6 +1,6 @@
 name: gg_gltf
 description: gg_gltf a library for parsing and generating gltf 3D graphic files
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/inlavigo/gg_gltf.git
 
 environment:
