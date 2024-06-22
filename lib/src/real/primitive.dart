@@ -8,6 +8,7 @@ import 'dart:typed_data';
 
 import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
+import 'package:gg_list/gg_list.dart';
 
 /// A primitive to be rendered.
 class Primitive {
@@ -27,22 +28,22 @@ class Primitive {
   final String name;
 
   /// The indices of the primitive.
-  final Uint16List indices;
+  final GgIntList indices;
 
   /// The normals of the primitive.
-  final Float32List normals;
+  final GgFloatList normals;
 
   /// The positions of the primitive.
-  final Float32List positions;
+  final GgFloatList positions;
 
   /// The tangents of the primitive.
-  final Float32List tangents;
+  final GgFloatList tangents;
 
   /// The texture coordinates of the primitive.
-  final Float32List textureCoordinates;
+  final GgFloatList textureCoordinates;
 
   /// The texture coordinates of the primitive.
-  final Float32List colors;
+  final GgFloatList colors;
 
   /// The rendering mode of the primitive.
   final int mode;
@@ -77,11 +78,30 @@ class Primitive {
   /// Example primitive
   static final example = Primitive(
     name: 'example',
-    indices: Uint16List.fromList([0, 1, 2, 3, 4, 5]),
-    normals: Float32List.fromList([0.0, 0.0, 1.0, 0.0, 0.0, 1.0]),
-    positions: Float32List.fromList([0.0, 0.0, 0.0, 1.0, 0.0, 0.0]),
-    tangents: Float32List.fromList([0.0, 0.0, 1.0, 0.0, 0.0, 1.0]),
-    colors: Float32List.fromList([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0]),
-    textureCoordinates: Float32List.fromList([0.0, 0.0, 1.0, 0.0]),
+    indices: GgIntList.fromList(
+      [0, 1, 2, 3, 4, 5],
+      min: 0,
+      max: GgRanges.uint16Max,
+    ),
+    normals: GgFloatList.fromList(
+      [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
+      listType: Float32List,
+    ),
+    positions: GgFloatList.fromList(
+      [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+      listType: Float32List,
+    ),
+    tangents: GgFloatList.fromList(
+      [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
+      listType: Float32List,
+    ),
+    colors: GgFloatList.fromList(
+      [0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0],
+      listType: Float32List,
+    ),
+    textureCoordinates: GgFloatList.fromList(
+      [0.0, 0.0, 1.0, 0.0],
+      listType: Float32List,
+    ),
   );
 }

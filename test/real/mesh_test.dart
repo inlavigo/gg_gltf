@@ -7,6 +7,7 @@
 import 'dart:typed_data';
 
 import 'package:gg_gltf/gg_gltf.dart';
+import 'package:gg_list/gg_list.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -17,13 +18,27 @@ void main() {
       primitives: [
         Primitive(
           name: 'a',
-          indices: Uint16List.fromList([0, 1, 2, 3, 4, 5]),
-          normals: Float32List.fromList([0.0, 0.0, 1.0, 0.0, 0.0, 1.0]),
-          positions: Float32List.fromList([0.0, 0.0, 0.0, 1.0, 0.0, 0.0]),
-          tangents:
-              Float32List.fromList([0.0, 0.0, 1.0, 0.0, 0.0, 1.0 + change]),
-          textureCoordinates: Float32List.fromList([0.0, 0.0, 1.0, 0.0]),
-          colors: Float32List.fromList([0.0, 0.0, 1.0, 0.0]),
+          indices: GgIntList.fromList([0, 1, 2, 3, 4, 5], listType: Uint16List),
+          normals: GgFloatList.fromList(
+            [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
+            listType: Float32List,
+          ),
+          positions: GgFloatList.fromList(
+            [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+            listType: Float32List,
+          ),
+          tangents: GgFloatList.fromList(
+            [0.0, 0.0, 1.0, 0.0, 0.0, 1.0 + change],
+            listType: Float32List,
+          ),
+          textureCoordinates: GgFloatList.fromList(
+            [0.0, 0.0, 1.0, 0.0],
+            listType: Float32List,
+          ),
+          colors: GgFloatList.fromList(
+            [0.0, 0.0, 1.0, 0.0],
+            listType: Float32List,
+          ),
         ),
       ],
     );

@@ -25,15 +25,3 @@ export 'src/json/scene_json.dart';
 export 'src/real/mesh.dart';
 export 'src/real/node.dart';
 export 'src/real/primitive.dart';
-
-// Implement later:
-
-// export 'src/animation.dart';
-// export 'src/camera.dart';
-// export 'src/image.dart';
-// export 'src/material.dart';
-// export 'src/sampler.dart';
-// export 'src/skin.dart';
-// export 'src/texture.dart';
-// export 'src/texture_info.dart';
-// export 'src/texture_transform.dart';

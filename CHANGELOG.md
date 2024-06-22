@@ -7,6 +7,10 @@
 - Add Json prefix to json classes
 - add real classes
 
+### Changed
+
+- Switch to ggList
+
 ## [0.0.1] - 2024-06-21
 
 ### Added
