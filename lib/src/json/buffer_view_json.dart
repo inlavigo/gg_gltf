@@ -36,10 +36,7 @@ class BufferViewJson {
   bool operator ==(Object other) {
     if (other is! BufferViewJson) return false;
     BufferViewJson bufferView = other;
-    return bufferView.buffer == buffer &&
-        bufferView.byteOffset == byteOffset &&
-        bufferView.byteLength == byteLength &&
-        bufferView.byteStride == byteStride;
+    return bufferView.hashCode == hashCode;
   }
 
   @override

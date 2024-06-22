@@ -98,6 +98,7 @@ class ExamplePrimitives {
         ),
       );
 
+  // ...........................................................................
   /// A simple rectangle
   static Primitive rectangle({
     List<double> positions = const [
@@ -113,17 +114,19 @@ class ExamplePrimitives {
       /// Point 4
       1.0, 1.0, 0.0,
     ],
+    required List<double> normal,
+    List<int> indices = const [
+      /// Triangle 1
+      0, 1, 2,
+
+      /// Triangle 2
+      2, 1, 3,
+    ],
   }) =>
       Primitive(
         name: 'rectangle',
         indices: GgIntList.fromList(
-          [
-            /// Triangle 1
-            0, 1, 2,
-
-            /// Triangle 2
-            2, 1, 3,
-          ],
+          indices,
           min: 0,
           max: GgRanges.uint16Max,
         ),
@@ -132,19 +135,7 @@ class ExamplePrimitives {
           listType: Float32List,
         ),
         normals: GgFloatList.fromList(
-          [
-            /// Point 1
-            0.0, 0.0, 1.0,
-
-            /// Point 2
-            0.0, 0.0, 1.0,
-
-            /// Point 3
-            0.0, 0.0, 1.0,
-
-            /// Point 4
-            0.0, 0.0, 1.0,
-          ],
+          [...normal, ...normal, ...normal, ...normal],
           listType: Float32List,
         ),
         tangents: GgFloatList.fromList(

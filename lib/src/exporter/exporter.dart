@@ -4,6 +4,7 @@
 // Use of this source code is governed by terms that can be
 // found in the LICENSE file in the root of this package.
 
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -11,6 +12,9 @@ import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:gg_list/gg_list.dart';
+
+const _enableTangents = false;
+const _enableTextures = false;
 
 /// A class to export a glTF asset.
 class Exporter {
@@ -35,7 +39,7 @@ class Exporter {
       bufferViews: [],
     );
 
-    final buffers = _Buffers();
+    final buffers = _Objects();
     final primitives = <Primitive>[];
     final meshes = <Mesh>[];
     final nodes = <Node>[];
@@ -46,7 +50,7 @@ class Exporter {
     _collectNodes(scenes, nodes);
     _writeAccessorsToJson(buffers, json);
     _writeBufferViewsToJson(buffers, json);
-    _writeBufferToJson(buffers, json);
+    _writeBinaryDataToJson(buffers, json);
     _writeMeshes(buffers, meshes, json);
     _writeNodes(nodes, meshes, json);
     _writeScenes(scenes, nodes, json);
@@ -95,7 +99,7 @@ class Exporter {
   void _collectBuffersAndAccessors(
     GltfJson gltfJson,
     List<Primitive> primitives,
-    _Buffers buffers,
+    _Objects buffers,
   ) {
     for (final primitive in primitives) {
       _collectPrimitiveBufferAndAccessor(primitive, buffers);
@@ -136,25 +140,33 @@ class Exporter {
   // ...........................................................................
   void _collectPrimitiveBufferAndAccessor(
     Primitive primitive,
-    _Buffers buffers,
+    _Objects objects,
   ) {
-    _collectData(primitive.indices, buffers, 'indices', primitive);
-    _collectData(primitive.normals, buffers, 'normals', primitive);
-    _collectData(primitive.positions, buffers, 'positions', primitive);
-    _collectData(primitive.tangents, buffers, 'tangents', primitive);
-    _collectData(
-      primitive.textureCoordinates,
-      buffers,
-      'textureCoordinates',
-      primitive,
-    );
-    _collectData(primitive.colors, buffers, 'colors', primitive);
+    _collectData(primitive.indices, objects, 'indices', primitive);
+    _collectData(primitive.normals, objects, 'normals', primitive);
+    _collectData(primitive.positions, objects, 'positions', primitive);
+
+    // coverage:ignore-start
+    if (_enableTangents) {
+      _collectData(primitive.tangents, objects, 'tangents', primitive);
+    }
+
+    if (_enableTextures) {
+      _collectData(
+        primitive.textureCoordinates,
+        objects,
+        'textureCoordinates',
+        primitive,
+      );
+    }
+    // coverage:ignore-end
+    _collectData(primitive.colors, objects, 'colors', primitive);
   }
 
   // ...........................................................................
   void _collectData(
-    GgList<dynamic> data,
-    _Buffers buffers,
+    GgList<num> data,
+    _Objects objects,
     String type,
     Primitive primitive,
   ) {
@@ -162,34 +174,24 @@ class Exporter {
     assert(data.data is TypedData);
     if (data.isEmpty) return;
 
-    // Did we already create a buffer view
-    final hash = data.hashCode;
-    late final int bufferIndex;
-    if (buffers.bufferIndices.containsKey(hash)) {
-      bufferIndex = buffers.bufferIndices[hash]!;
-    } else {
-      // Add buffer
-      bufferIndex = buffers.buffers.length;
-      buffers.buffers.add(data.data as TypedData);
-      buffers.bufferIndices[hash] = bufferIndex;
-    }
-
     // Calc stride
     int stride = AccessorType().stride(type);
 
+    // Add buffer when not yet staged
+    final buffer = _addbuffer(objects, stride, data, type);
+
     // Add buffer view
-    _addBufferView(buffers, stride);
+    _addBufferView(objects, stride, type, buffer);
 
     // Add accessor
-    _addAccessor(buffers, bufferIndex, type, data, primitive, stride);
+    _addAccessor(objects, type, data, primitive, stride);
   }
 
   // ...........................................................................
   void _addAccessor(
-    _Buffers buffers,
-    int bufferIndex,
+    _Objects objects,
     String type,
-    GgList<dynamic> data,
+    GgList<num> data,
     Primitive primitive,
     int stride,
   ) {
@@ -217,8 +219,10 @@ class Exporter {
     final max = _maximum(data.data as List<num>, stride);
     assert(data.length % stride == 0);
 
+    final bufferViewIndex = objects.bufferViews.length - 1;
+
     final accessor = AccessorJson(
-      bufferView: bufferIndex,
+      bufferView: bufferViewIndex,
       byteOffset: 0,
       componentType: componentType,
       count: data.length ~/ stride,
@@ -227,14 +231,15 @@ class Exporter {
       max: max,
     );
 
-    buffers.accessors.add(accessor);
-    final accessorHash = _accessorHashCode(primitive, data.hashCode);
-    buffers.accessorIndices[accessorHash] = buffers.accessors.length - 1;
-  }
-
-  // ...........................................................................
-  int _accessorHashCode(Primitive primitive, int dataHashCode) {
-    return primitive.hashCode ^ dataHashCode;
+    objects.accessors.add(accessor);
+    objects.primitiveAccessors.add(
+      _PrimitiveAccessor(
+        primitive: primitive,
+        accessor: accessor,
+        accessorIndex: objects.accessors.length - 1,
+        type: type,
+      ),
+    );
   }
 
   // ...........................................................................
@@ -275,44 +280,84 @@ class Exporter {
   }
 
   // ...........................................................................
-  void _addBufferView(_Buffers buffers, int stride) {
-    final buffer = buffers.buffers.last;
-    final byteOffset = buffers.byteOffset;
-    final componentTypeLength = buffer.elementSizeInBytes * stride;
+  _Buffer _addbuffer(
+    _Objects objects,
+    int stride,
+    GgList<num> data,
+    String type,
+  ) {
+    if (type == 'indices') {
+      print(1);
+    }
+
+    // Calc byte offset
+    final byteOffset = objects.byteOffset;
+    final componentTypeLength =
+        (data.data as TypedData).elementSizeInBytes * stride;
     final byteOffsetAligned = byteOffset + (byteOffset % componentTypeLength);
 
-    final bufferView = BufferViewJson(
-      buffer: 0, // We only have one buffer
+    // Create buffer
+    final buffer = _Buffer(
+      data: data,
       byteOffset: byteOffsetAligned,
-      byteLength: buffer.lengthInBytes,
     );
 
-    buffers.bufferViews.add(bufferView);
+    // Add buffer
+    final existingBuffer = objects.buffers.lookup(buffer);
+    if (existingBuffer == null) {
+      objects.buffers.add(buffer);
+    }
+
+    return existingBuffer ?? buffer;
   }
 
   // ...........................................................................
-  void _writeAccessorsToJson(_Buffers buffers, GltfJson gltfJson) {
-    gltfJson.accessors.addAll(buffers.accessors);
+  void _addBufferView(
+    _Objects objects,
+    int stride,
+    String type,
+    _Buffer buffer,
+  ) {
+    final bufferView = _BufferView(
+      type: type,
+      bufferView: BufferViewJson(
+        buffer: 0, // We only have one buffer
+        byteOffset: buffer.byteOffset,
+        byteLength: buffer.byteSize,
+      ),
+    );
+
+    objects.bufferViews.add(bufferView);
   }
 
   // ...........................................................................
-  void _writeBufferViewsToJson(_Buffers buffers, GltfJson gltfJson) {
-    gltfJson.bufferViews.addAll(buffers.bufferViews);
+  void _writeAccessorsToJson(_Objects objects, GltfJson gltfJson) {
+    gltfJson.accessors.addAll(objects.accessors);
   }
 
   // ...........................................................................
-  void _writeBufferToJson(_Buffers buffers, GltfJson gltfJson) {
+  void _writeBufferViewsToJson(_Objects objects, GltfJson gltfJson) {
+    gltfJson.bufferViews.addAll(
+      objects.bufferViews.map(
+        (e) => e.bufferView,
+      ),
+    );
+  }
+
+  // ...........................................................................
+  void _writeBinaryDataToJson(_Objects objects, GltfJson gltfJson) {
     // Estimate the buffer byte length
-    final lastBuffer = buffers.bufferViews.last;
-    final byteCount = lastBuffer.byteOffset + lastBuffer.byteLength;
+    final lastBuffer = objects.buffers.last;
+    final byteCount = objects.byteOffset;
+    assert(byteCount == lastBuffer.byteOffsetAfter);
 
     // Concatenate the buffers
     var bytes = ByteData(byteCount);
-    for (int i = 0; i < buffers.buffers.length; i++) {
-      final byteOffset = buffers.bufferViews[i].byteOffset;
+
+    for (final buffer in objects.buffers) {
       bytes.buffer.asUint8List().setAll(
-            byteOffset,
-            buffers.buffers[i].buffer.asUint8List(),
+            buffer.byteOffset,
+            (buffer.data.data as TypedData).buffer.asUint8List(),
           );
     }
 
@@ -322,7 +367,7 @@ class Exporter {
 
     // Create the buffer
     final buffer = BufferJson(
-      byteLength: buffers.byteOffset,
+      byteLength: objects.byteOffset,
       uri: 'data:application/octet-stream;base64,$bufferBase64',
     );
 
@@ -366,7 +411,7 @@ class Exporter {
 
   // ...........................................................................
   void _writeMeshes(
-    _Buffers buffers,
+    _Objects objects,
     List<Mesh> meshes,
     GltfJson gltfJson,
   ) {
@@ -374,21 +419,28 @@ class Exporter {
       final primitives = <PrimitiveJson>[];
       for (final p in mesh.primitives) {
         // Write indices
-        final indicesIndex = buffers.bufferIndices[p.indices.hashCode]!;
+        final accessors =
+            objects.primitiveAccessors.where((pa) => pa.primitive == p);
 
-        int hc(GgList<dynamic> data) => _accessorHashCode(p, data.hashCode);
+        int accessor(String type) => accessors
+            .firstWhere(
+              (pa) => pa.type == type,
+            )
+            .accessorIndex;
 
         final attributes = <String, int>{
-          'NORMAL': buffers.accessorIndices[hc(p.normals)]!,
-          'POSITION': buffers.accessorIndices[hc(p.positions)]!,
-          'TANGENT': buffers.accessorIndices[hc(p.tangents)]!,
-          'TEXCOORD_0': buffers.accessorIndices[hc(p.textureCoordinates)]!,
-          'COLOR_0': buffers.accessorIndices[hc(p.colors)]!,
+          'NORMAL': accessor('normals'),
+          'POSITION': accessor('positions'),
+          // coverage:ignore-start
+          if (_enableTangents) 'TANGENT': accessor('tangents'),
+          if (_enableTextures) 'TEXCOORD_0': accessor('textureCoordinates'),
+          // coverage:ignore-end
+          'COLOR_0': accessor('colors'),
         };
 
         final primitiveJson = PrimitiveJson(
           attributes: attributes,
-          indices: indicesIndex,
+          indices: accessor('indices'),
         );
 
         primitives.add(primitiveJson);
@@ -457,13 +509,59 @@ class Exporter {
   }
 }
 
-class _Buffers {
-  final Map<int, int> bufferIndices = {};
-  final Map<int, int> accessorIndices = {};
-  final List<TypedData> buffers = [];
-  final List<BufferViewJson> bufferViews = [];
+// .............................................................................
+class _Buffer {
+  _Buffer({required this.data, required this.byteOffset});
+  final GgList<num> data;
+  final int byteOffset;
+  int get byteOffsetAfter =>
+      byteOffset + (data.data as TypedData).lengthInBytes;
+  int get byteSize => (data.data as TypedData).lengthInBytes;
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => data.hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is _Buffer) {
+      return data.hashCode == other.data.hashCode;
+    }
+    return false;
+  }
+}
+
+// .............................................................................
+class _PrimitiveAccessor {
+  _PrimitiveAccessor({
+    required this.primitive,
+    required this.accessor,
+    required this.accessorIndex,
+    required this.type,
+  });
+
+  final Primitive primitive;
+  final AccessorJson accessor;
+  final int accessorIndex;
+  final String type;
+}
+
+class _BufferView {
+  _BufferView({
+    required this.bufferView,
+    required this.type,
+  });
+
+  final BufferViewJson bufferView;
+  final String type;
+}
+
+// .............................................................................
+class _Objects {
+  final LinkedHashSet<_Buffer> buffers = LinkedHashSet<_Buffer>();
+  final List<_BufferView> bufferViews = [];
   final List<AccessorJson> accessors = [];
-  int get byteOffset => bufferViews.isEmpty
-      ? 0
-      : bufferViews.last.byteOffset + bufferViews.last.byteLength;
+  final List<_PrimitiveAccessor> primitiveAccessors = [];
+
+  int get byteOffset => buffers.isEmpty ? 0 : buffers.last.byteOffsetAfter;
 }

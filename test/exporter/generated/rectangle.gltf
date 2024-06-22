@@ -24,9 +24,7 @@
           "attributes": {
             "NORMAL": 1,
             "POSITION": 2,
-            "TANGENT": 3,
-            "TEXCOORD_0": 4,
-            "COLOR_0": 5
+            "COLOR_0": 3
           },
           "indices": 0,
           "mode": 4
@@ -36,8 +34,8 @@
   ],
   "buffers": [
     {
-      "uri": "data:application/octet-stream;base64,AAABAAIAAgABAAMAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAIA/",
-      "byteLength": 288
+      "uri": "data:application/octet-stream;base64,AAABAAIAAgABAAMAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAACAPw==",
+      "byteLength": 184
     }
   ],
   "bufferViews": [
@@ -59,16 +57,6 @@
     {
       "buffer": 0,
       "byteOffset": 120,
-      "byteLength": 64
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 184,
-      "byteLength": 32
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 224,
       "byteLength": 64
     }
   ],
@@ -122,40 +110,6 @@
     },
     {
       "bufferView": 3,
-      "byteOffset": 0,
-      "componentType": 5126,
-      "count": 4,
-      "type": "VEC4",
-      "min": [
-        0.0,
-        0.0,
-        1.0,
-        1.0
-      ],
-      "max": [
-        0.0,
-        0.0,
-        1.0,
-        1.0
-      ]
-    },
-    {
-      "bufferView": 4,
-      "byteOffset": 0,
-      "componentType": 5126,
-      "count": 4,
-      "type": "VEC2",
-      "min": [
-        0.0,
-        0.0
-      ],
-      "max": [
-        1.0,
-        1.0
-      ]
-    },
-    {
-      "bufferView": 5,
       "byteOffset": 0,
       "componentType": 5126,
       "count": 4,

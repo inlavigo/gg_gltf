@@ -24,9 +24,7 @@
           "attributes": {
             "NORMAL": 1,
             "POSITION": 2,
-            "TANGENT": 3,
-            "TEXCOORD_0": 4,
-            "COLOR_0": 5
+            "COLOR_0": 3
           },
           "indices": 0,
           "mode": 4
@@ -36,8 +34,8 @@
   ],
   "buffers": [
     {
-      "uri": "data:application/octet-stream;base64,AAABAAIAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAPw==",
-      "byteLength": 208
+      "uri": "data:application/octet-stream;base64,AAABAAIAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAPw==",
+      "byteLength": 136
     }
   ],
   "bufferViews": [
@@ -59,16 +57,6 @@
     {
       "buffer": 0,
       "byteOffset": 88,
-      "byteLength": 48
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 136,
-      "byteLength": 24
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 160,
       "byteLength": 48
     }
   ],
@@ -122,40 +110,6 @@
     },
     {
       "bufferView": 3,
-      "byteOffset": 0,
-      "componentType": 5126,
-      "count": 3,
-      "type": "VEC4",
-      "min": [
-        0.0,
-        0.0,
-        1.0,
-        1.0
-      ],
-      "max": [
-        0.0,
-        0.0,
-        1.0,
-        1.0
-      ]
-    },
-    {
-      "bufferView": 4,
-      "byteOffset": 0,
-      "componentType": 5126,
-      "count": 3,
-      "type": "VEC2",
-      "min": [
-        0.0,
-        0.0
-      ],
-      "max": [
-        1.0,
-        1.0
-      ]
-    },
-    {
-      "bufferView": 5,
       "byteOffset": 0,
       "componentType": 5126,
       "count": 3,

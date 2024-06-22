@@ -12,7 +12,16 @@ void main() {
     group('example', () {
       test('should work', () {
         expect(ExamplePrimitives.triangle(), isNotNull);
-        expect(ExamplePrimitives.rectangle(), isNotNull);
+        expect(
+          ExamplePrimitives.rectangle(
+            normal: [
+              0.0,
+              0.0,
+              1.0,
+            ],
+          ),
+          isNotNull,
+        );
       });
     });
   });

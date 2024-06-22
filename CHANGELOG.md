@@ -11,6 +11,7 @@
 
 - Switch to ggList
 - First gltf graphics are generated
+- Can draw a cuboid now
 
 ## [0.0.1] - 2024-06-21
 
