@@ -10,6 +10,7 @@
 ### Changed
 
 - Switch to ggList
+- First gltf graphics are generated
 
 ## [0.0.1] - 2024-06-21
 

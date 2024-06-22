@@ -11,7 +11,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'mesh_json.g.dart';
 
 /// A set of primitives to be rendered.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class MeshJson {
   /// The name of the mesh.
   final String? name;

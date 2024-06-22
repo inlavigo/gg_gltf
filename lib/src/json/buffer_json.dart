@@ -10,7 +10,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'buffer_json.g.dart';
 
 /// A buffer points to binary geometry, animation, or skins.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class BufferJson {
   /// The uri of the buffer.
   final String uri;

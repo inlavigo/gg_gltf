@@ -10,7 +10,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'accessor_json.g.dart';
 
 /// A typed view into a bufferView.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class AccessorJson {
   /// The index of the bufferView.
   final int bufferView;
@@ -27,6 +27,12 @@ class AccessorJson {
   /// The datatype of components in the attribute.
   final String type;
 
+  /// The minimum value of each component in this attribute.
+  final List<num> min;
+
+  /// The maximum value of each component in this attribute.
+  final List<num> max;
+
   /// Accessor constructor
   const AccessorJson({
     required this.bufferView,
@@ -34,6 +40,8 @@ class AccessorJson {
     required this.componentType,
     required this.count,
     required this.type,
+    required this.min,
+    required this.max,
   });
 
   /// Creates a new [AccessorJson] from a json map.

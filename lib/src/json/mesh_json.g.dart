@@ -13,7 +13,16 @@ MeshJson _$MeshJsonFromJson(Map<String, dynamic> json) => MeshJson(
           .toList(),
     );
 
-Map<String, dynamic> _$MeshJsonToJson(MeshJson instance) => <String, dynamic>{
-      'name': instance.name,
-      'primitives': instance.primitives,
-    };
+Map<String, dynamic> _$MeshJsonToJson(MeshJson instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  val['primitives'] = instance.primitives;
+  return val;
+}

@@ -11,7 +11,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'scene_json.g.dart';
 
 /// The root nodes of a scene.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class SceneJson {
   /// The root nodes of a scene.
   final List<int> nodes;

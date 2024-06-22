@@ -10,7 +10,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'buffer_view_json.g.dart';
 
 /// A view into a buffer.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class BufferViewJson {
   /// The index of the buffer.
   final int buffer;

@@ -8,6 +8,7 @@ part of 'gltf_json.dart';
 
 GltfJson _$GltfJsonFromJson(Map<String, dynamic> json) => GltfJson(
       asset: AssetJson.fromJson(json['asset'] as Map<String, dynamic>),
+      scene: (json['scene'] as num?)?.toInt() ?? 0,
       scenes: (json['scenes'] as List<dynamic>?)
               ?.map((e) => SceneJson.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -36,6 +37,7 @@ GltfJson _$GltfJsonFromJson(Map<String, dynamic> json) => GltfJson(
 
 Map<String, dynamic> _$GltfJsonToJson(GltfJson instance) => <String, dynamic>{
       'asset': instance.asset,
+      'scene': instance.scene,
       'scenes': instance.scenes,
       'nodes': instance.nodes,
       'meshes': instance.meshes,

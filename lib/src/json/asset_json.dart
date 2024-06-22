@@ -9,7 +9,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'asset_json.g.dart';
 
 /// Metadata about the glTF asset.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class AssetJson {
   /// The glTF version.
   final String version;

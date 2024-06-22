@@ -13,7 +13,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'gltf_json.g.dart';
 
 /// The main entry point for the glTF 2.0 file format.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class GltfJson {
   /// Metadata about the glTF asset.
   GltfJson({

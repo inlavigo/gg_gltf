@@ -25,3 +25,10 @@ export 'src/json/scene_json.dart';
 export 'src/real/mesh.dart';
 export 'src/real/node.dart';
 export 'src/real/primitive.dart';
+export 'src/real/scene.dart';
+
+export 'src/exporter/exporter.dart';
+export 'src/examples/example_primitives.dart';
+export 'src/examples/example_meshes.dart';
+export 'src/examples/example_nodes.dart';
+export 'src/examples/example_scenes.dart';

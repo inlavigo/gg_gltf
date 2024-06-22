@@ -14,10 +14,19 @@ PrimitiveJson _$PrimitiveJsonFromJson(Map<String, dynamic> json) =>
       mode: (json['mode'] as num?)?.toInt() ?? 4,
     );
 
-Map<String, dynamic> _$PrimitiveJsonToJson(PrimitiveJson instance) =>
-    <String, dynamic>{
-      'attributes': instance.attributes,
-      'indices': instance.indices,
-      'material': instance.material,
-      'mode': instance.mode,
-    };
+Map<String, dynamic> _$PrimitiveJsonToJson(PrimitiveJson instance) {
+  final val = <String, dynamic>{
+    'attributes': instance.attributes,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('indices', instance.indices);
+  writeNotNull('material', instance.material);
+  val['mode'] = instance.mode;
+  return val;
+}

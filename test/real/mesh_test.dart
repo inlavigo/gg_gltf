@@ -15,32 +15,35 @@ void main() {
     final change = withChange ? 0.0001 : 0;
     final x = Mesh(
       name: 'a',
-      primitives: [
-        Primitive(
-          name: 'a',
-          indices: GgIntList.fromList([0, 1, 2, 3, 4, 5], listType: Uint16List),
-          normals: GgFloatList.fromList(
-            [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
-            listType: Float32List,
+      primitives: GgList.fromList(
+        [
+          Primitive(
+            name: 'a',
+            indices:
+                GgIntList.fromList([0, 1, 2, 3, 4, 5], listType: Uint16List),
+            normals: GgFloatList.fromList(
+              [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
+              listType: Float32List,
+            ),
+            positions: GgFloatList.fromList(
+              [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+              listType: Float32List,
+            ),
+            tangents: GgFloatList.fromList(
+              [0.0, 0.0, 1.0, 0.0, 0.0, 1.0 + change],
+              listType: Float32List,
+            ),
+            textureCoordinates: GgFloatList.fromList(
+              [0.0, 0.0, 1.0, 0.0],
+              listType: Float32List,
+            ),
+            colors: GgFloatList.fromList(
+              [0.0, 0.0, 1.0, 0.0],
+              listType: Float32List,
+            ),
           ),
-          positions: GgFloatList.fromList(
-            [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
-            listType: Float32List,
-          ),
-          tangents: GgFloatList.fromList(
-            [0.0, 0.0, 1.0, 0.0, 0.0, 1.0 + change],
-            listType: Float32List,
-          ),
-          textureCoordinates: GgFloatList.fromList(
-            [0.0, 0.0, 1.0, 0.0],
-            listType: Float32List,
-          ),
-          colors: GgFloatList.fromList(
-            [0.0, 0.0, 1.0, 0.0],
-            listType: Float32List,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
 
     return x;

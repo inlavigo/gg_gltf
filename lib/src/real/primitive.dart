@@ -4,8 +4,6 @@
 // Use of this source code is governed by terms that can be
 // found in the LICENSE file in the root of this package.
 
-import 'dart:typed_data';
-
 import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:gg_list/gg_list.dart';
@@ -76,32 +74,5 @@ class Primitive {
 
   // ...........................................................................
   /// Example primitive
-  static final example = Primitive(
-    name: 'example',
-    indices: GgIntList.fromList(
-      [0, 1, 2, 3, 4, 5],
-      min: 0,
-      max: GgRanges.uint16Max,
-    ),
-    normals: GgFloatList.fromList(
-      [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
-      listType: Float32List,
-    ),
-    positions: GgFloatList.fromList(
-      [0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
-      listType: Float32List,
-    ),
-    tangents: GgFloatList.fromList(
-      [0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
-      listType: Float32List,
-    ),
-    colors: GgFloatList.fromList(
-      [0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0],
-      listType: Float32List,
-    ),
-    textureCoordinates: GgFloatList.fromList(
-      [0.0, 0.0, 1.0, 0.0],
-      listType: Float32List,
-    ),
-  );
+  static final example = ExamplePrimitives.triangle();
 }

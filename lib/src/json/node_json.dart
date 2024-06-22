@@ -10,7 +10,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'node_json.g.dart';
 
 /// A node in the node hierarchy.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class NodeJson {
   /// The name of the node.
   final String? name;
@@ -22,7 +22,11 @@ class NodeJson {
   final int? mesh;
 
   /// Node constructor
-  const NodeJson({this.name, this.children, this.mesh});
+  NodeJson({this.name, this.children, this.mesh}) {
+    _hashCode = name.hashCode ^
+        (children != null ? Object.hashAll(children!) : 0) ^
+        mesh.hashCode;
+  }
 
   /// Creates a new [NodeJson] from a json map.
   factory NodeJson.fromJson(Map<String, dynamic> json) =>
@@ -32,19 +36,14 @@ class NodeJson {
   Map<String, dynamic> toJson() => _$NodeJsonToJson(this);
 
   @override
-  bool operator ==(Object other) {
-    if (other is! NodeJson) return false;
-    NodeJson node = other;
-    return node.name == name && node.children == children && node.mesh == mesh;
-  }
+  bool operator ==(Object other) => other.hashCode == hashCode;
 
   @override
-  int get hashCode =>
-      name.hashCode ^
-      (children != null ? Object.hashAll(children!) : 0) ^
-      mesh.hashCode;
+  int get hashCode => _hashCode;
 
   // ...........................................................................
   /// Returns an example [NodeJson] instance for test purposes.
   static NodeJson get example => GltfJson.example.nodes[0];
+
+  late final int _hashCode;
 }

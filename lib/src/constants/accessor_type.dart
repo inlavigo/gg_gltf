@@ -17,4 +17,15 @@ class AccessorType {
 
   /// Vec4
   static const String vec4 = 'VEC4';
+
+  /// Returns the stride for the given type.
+  int stride(String type) => switch (type) {
+        'indices' => 1,
+        'normals' => 3,
+        'positions' => 3,
+        'tangents' => 4,
+        'textureCoordinates' => 2,
+        'colors' => 4,
+        _ => throw ArgumentError('Unknown type: $type'),
+      };
 }

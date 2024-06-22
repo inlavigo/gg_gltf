@@ -14,8 +14,17 @@ NodeJson _$NodeJsonFromJson(Map<String, dynamic> json) => NodeJson(
       mesh: (json['mesh'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$NodeJsonToJson(NodeJson instance) => <String, dynamic>{
-      'name': instance.name,
-      'children': instance.children,
-      'mesh': instance.mesh,
-    };
+Map<String, dynamic> _$NodeJsonToJson(NodeJson instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('children', instance.children);
+  writeNotNull('mesh', instance.mesh);
+  return val;
+}

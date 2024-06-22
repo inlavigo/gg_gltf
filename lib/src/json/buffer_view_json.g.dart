@@ -14,10 +14,19 @@ BufferViewJson _$BufferViewJsonFromJson(Map<String, dynamic> json) =>
       byteStride: (json['byteStride'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$BufferViewJsonToJson(BufferViewJson instance) =>
-    <String, dynamic>{
-      'buffer': instance.buffer,
-      'byteOffset': instance.byteOffset,
-      'byteLength': instance.byteLength,
-      'byteStride': instance.byteStride,
-    };
+Map<String, dynamic> _$BufferViewJsonToJson(BufferViewJson instance) {
+  final val = <String, dynamic>{
+    'buffer': instance.buffer,
+    'byteOffset': instance.byteOffset,
+    'byteLength': instance.byteLength,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('byteStride', instance.byteStride);
+  return val;
+}

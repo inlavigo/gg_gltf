@@ -11,7 +11,17 @@ AssetJson _$AssetJsonFromJson(Map<String, dynamic> json) => AssetJson(
       generator: json['generator'] as String?,
     );
 
-Map<String, dynamic> _$AssetJsonToJson(AssetJson instance) => <String, dynamic>{
-      'version': instance.version,
-      'generator': instance.generator,
-    };
+Map<String, dynamic> _$AssetJsonToJson(AssetJson instance) {
+  final val = <String, dynamic>{
+    'version': instance.version,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('generator', instance.generator);
+  return val;
+}

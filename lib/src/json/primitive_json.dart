@@ -11,7 +11,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'primitive_json.g.dart';
 
 /// Geometry to be rendered with the given material.
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class PrimitiveJson {
   /// A dictionary object, where each key corresponds to mesh attribute semantic
   final Map<String, int> attributes;

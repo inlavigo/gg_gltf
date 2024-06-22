@@ -23,5 +23,26 @@ void main() {
         expect(AccessorType.vec4, 'VEC4');
       });
     });
+
+    group('stride', () {
+      test('should work', () {
+        final accessorType = AccessorType();
+        expect(accessorType, isNotNull);
+
+        expect(accessorType.stride('indices'), 1);
+
+        expect(accessorType.stride('normals'), 3);
+
+        expect(accessorType.stride('positions'), 3);
+
+        expect(accessorType.stride('tangents'), 4);
+
+        expect(accessorType.stride('textureCoordinates'), 2);
+
+        expect(accessorType.stride('colors'), 4);
+
+        expect(() => accessorType.stride('unknown'), throwsArgumentError);
+      });
+    });
   });
 }

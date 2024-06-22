@@ -16,11 +16,74 @@ void main() {
       test('should work', () {
         final primitive = Primitive.example;
         expect(primitive, isNotNull);
-        expect(primitive.indices, [0, 1, 2, 3, 4, 5]);
-        expect(primitive.normals, [0.0, 0.0, 1.0, 0.0, 0.0, 1.0]);
-        expect(primitive.positions, [0.0, 0.0, 0.0, 1.0, 0.0, 0.0]);
-        expect(primitive.tangents, [0.0, 0.0, 1.0, 0.0, 0.0, 1.0]);
-        expect(primitive.textureCoordinates, [0.0, 0.0, 1.0, 0.0]);
+        expect(
+          primitive.indices,
+          [
+            /// Point 1
+            0,
+
+            /// Point 2
+            1,
+
+            /// Point3
+            2,
+          ],
+        );
+        expect(
+          primitive.normals,
+          [
+            /// Point 1
+            0.0, 0.0, 1.0,
+
+            /// Point 2
+            0.0, 0.0, 1.0,
+
+            /// Point 3
+            0.0, 0.0, 1.0,
+          ],
+        );
+        expect(
+          primitive.positions,
+          [
+            /// Point 1
+            0.0, 0.0, 0.0,
+
+            /// Point 2
+            1.0, 0.0, 0.0,
+
+            /// Point 3
+            0.0, 1.0, 0.0,
+          ],
+        );
+        expect(
+          primitive.tangents,
+          [
+            /// Point 1
+            0.0, 0.0, 1.0, 1.0,
+
+            /// Point 2
+            0.0, 0.0, 1.0, 1.0,
+
+            /// Point 3
+            0.0, 0.0, 1.0, 1.0,
+          ],
+        );
+        expect(
+          primitive.textureCoordinates,
+          [
+            /// Point 1
+            0.0,
+            0.0,
+
+            /// Point 2
+            1.0,
+            1.0,
+
+            /// Point 3
+            0.0,
+            1.0,
+          ],
+        );
       });
     });
   });
