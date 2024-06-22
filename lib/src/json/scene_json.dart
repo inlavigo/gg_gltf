@@ -38,5 +38,5 @@ class SceneJson {
 
   // ...........................................................................
   /// Returns an example [SceneJson] instance for test purposes.
-  static SceneJson get example => GltfJson.example.scenes![0];
+  static SceneJson get example => GltfJson.example.scenes[0];
 }

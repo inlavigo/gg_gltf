@@ -44,7 +44,7 @@ class AccessorJson {
   Map<String, dynamic> toJson() => _$AccessorJsonToJson(this);
 
   /// Returns an example [AccessorJson] instance
-  static AccessorJson get example => GltfJson.example.accessors![0];
+  static AccessorJson get example => GltfJson.example.accessors[0];
 
   @override
   bool operator ==(Object other) {

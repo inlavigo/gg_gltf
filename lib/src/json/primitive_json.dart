@@ -61,5 +61,5 @@ class PrimitiveJson {
 
   // ...........................................................................
   /// Returns an example [PrimitiveJson] instance for test purposes.
-  static PrimitiveJson get example => GltfJson.example.meshes![0].primitives[0];
+  static PrimitiveJson get example => GltfJson.example.meshes[0].primitives[0];
 }

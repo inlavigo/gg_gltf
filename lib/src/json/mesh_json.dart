@@ -42,5 +42,5 @@ class MeshJson {
 
   // ...........................................................................
   /// Returns an example [MeshJson] instance for test purposes.
-  static MeshJson get example => GltfJson.example.meshes![0];
+  static MeshJson get example => GltfJson.example.meshes[0];
 }

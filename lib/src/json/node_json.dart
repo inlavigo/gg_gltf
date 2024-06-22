@@ -46,5 +46,5 @@ class NodeJson {
 
   // ...........................................................................
   /// Returns an example [NodeJson] instance for test purposes.
-  static NodeJson get example => GltfJson.example.nodes![0];
+  static NodeJson get example => GltfJson.example.nodes[0];
 }

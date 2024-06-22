@@ -16,14 +16,15 @@ part 'gltf_json.g.dart';
 @JsonSerializable()
 class GltfJson {
   /// Metadata about the glTF asset.
-  const GltfJson({
+  GltfJson({
     required this.asset,
-    this.scenes,
-    this.nodes,
-    this.meshes,
-    this.buffers,
-    this.bufferViews,
-    this.accessors,
+    this.scene = 0,
+    this.scenes = const [],
+    this.nodes = const [],
+    this.meshes = const [],
+    this.buffers = const [],
+    this.bufferViews = const [],
+    this.accessors = const [],
   });
 
   /// Creates a new [GltfJson] from a json map.
@@ -36,29 +37,33 @@ class GltfJson {
   /// Metadata about the glTF asset.
   final AssetJson asset;
 
+  /// The default scene.
+  int scene = 0;
+
   /// A list of scenes.
-  final List<SceneJson>? scenes;
+  final List<SceneJson> scenes;
 
   /// A list of nodes.
-  final List<NodeJson>? nodes;
+  final List<NodeJson> nodes;
 
   /// A list of meshes.
-  final List<MeshJson>? meshes;
+  final List<MeshJson> meshes;
 
   /// A list of buffers.
-  final List<BufferJson>? buffers;
+  final List<BufferJson> buffers;
 
   /// A list of bufferViews.
-  final List<BufferViewJson>? bufferViews;
+  final List<BufferViewJson> bufferViews;
 
   /// A list of accessors.
-  final List<AccessorJson>? accessors;
+  final List<AccessorJson> accessors;
 
   @override
   bool operator ==(Object other) {
     if (other is! GltfJson) return false;
     GltfJson gltf = other;
     return gltf.asset == asset &&
+        gltf.scene == scene &&
         const ListEquality<SceneJson>().equals(gltf.scenes, scenes) &&
         const ListEquality<NodeJson>().equals(gltf.nodes, nodes) &&
         const ListEquality<MeshJson>().equals(gltf.meshes, meshes) &&
@@ -71,12 +76,13 @@ class GltfJson {
   @override
   int get hashCode =>
       asset.hashCode ^
-      (scenes != null ? Object.hashAll(scenes!) : 0) ^
-      (nodes != null ? Object.hashAll(nodes!) : 0) ^
-      (meshes != null ? Object.hashAll(meshes!) : 0) ^
-      (buffers != null ? Object.hashAll(buffers!) : 0) ^
-      (bufferViews != null ? Object.hashAll(bufferViews!) : 0) ^
-      (accessors != null ? Object.hashAll(accessors!) : 0);
+      scene.hashCode ^
+      Object.hashAll(scenes) ^
+      Object.hashAll(nodes) ^
+      Object.hashAll(meshes) ^
+      Object.hashAll(buffers) ^
+      Object.hashAll(bufferViews) ^
+      Object.hashAll(accessors);
 
   // ...........................................................................
   /// Returns an example glTF instance

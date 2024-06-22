@@ -22,6 +22,10 @@ export 'src/json/node_json.dart';
 export 'src/json/primitive_json.dart';
 export 'src/json/scene_json.dart';
 
+export 'src/real/mesh.dart';
+export 'src/real/node.dart';
+export 'src/real/primitive.dart';
+
 // Implement later:
 
 // export 'src/animation.dart';

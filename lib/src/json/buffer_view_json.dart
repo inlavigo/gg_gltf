@@ -58,5 +58,5 @@ class BufferViewJson {
 
   // ...........................................................................
   /// Returns an example [BufferViewJson] instance for test purposes.
-  static BufferViewJson get example => GltfJson.example.bufferViews![1];
+  static BufferViewJson get example => GltfJson.example.bufferViews[1];
 }

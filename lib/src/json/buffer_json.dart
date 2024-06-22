@@ -40,5 +40,5 @@ class BufferJson {
 
   // ...........................................................................
   /// Returns an example [BufferJson] instance for test purposes.
-  static BufferJson get example => GltfJson.example.buffers![0];
+  static BufferJson get example => GltfJson.example.buffers[0];
 }

@@ -5,6 +5,7 @@
 ### Added
 
 - Add Json prefix to json classes
+- add real classes
 
 ## [0.0.1] - 2024-06-21
 
