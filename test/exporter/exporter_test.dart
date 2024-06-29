@@ -15,7 +15,7 @@ void main() {
           test('with a color', () async {
             final exporter = Exporter();
             expect(exporter, isNotNull);
-            await exporter.export(
+            await exporter.exportToFile(
               scenes: [
                 ExampleScenes.triangle(),
               ],
@@ -29,7 +29,7 @@ void main() {
           test('with a color', () async {
             final exporter = Exporter();
             expect(exporter, isNotNull);
-            await exporter.export(
+            await exporter.exportToFile(
               scenes: [
                 ExampleScenes.rectangle(),
               ],
@@ -43,7 +43,7 @@ void main() {
           test('with a color', () async {
             final exporter = Exporter();
             expect(exporter, isNotNull);
-            await exporter.export(
+            await exporter.exportToFile(
               scenes: [
                 ExampleScenes.cuboid(),
               ],
@@ -56,6 +56,20 @@ void main() {
         group('a node containing cuboid composed of four primitives', () {});
 
         group('a corpus composed of four cuboid nodes', () {});
+
+        group('a node containing a child node showing a triangle', () {
+          test('with a color', () async {
+            final exporter = Exporter();
+            expect(exporter, isNotNull);
+            await exporter.exportToFile(
+              scenes: [
+                ExampleScenes.parentWithChild(),
+              ],
+              directory: 'test/exporter/generated',
+              name: 'parentWithChild',
+            );
+          });
+        });
       });
     });
 

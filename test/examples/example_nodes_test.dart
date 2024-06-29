@@ -14,6 +14,7 @@ void main() {
         ExampleNodes.triangle();
         ExampleNodes.rectangle();
         ExampleNodes.cuboid();
+        ExampleNodes.parentWithChild();
       });
     });
   });

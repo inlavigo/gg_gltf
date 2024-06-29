@@ -12,8 +12,8 @@ class Mesh {
   /// Constructor
   Mesh({
     required this.name,
-    required this.primitives,
-  }) {
+    required List<Primitive> primitives,
+  }) : primitives = GgList.fromList(primitives) {
     _hashCode = name.hashCode ^ primitives.hashCode;
   }
 

@@ -6,6 +6,7 @@
 
 - Add Json prefix to json classes
 - add real classes
+- Add examples
 
 ### Changed
 

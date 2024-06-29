@@ -4,6 +4,8 @@
 // Use of this source code is governed by terms that can be
 // found in the LICENSE file in the root of this package.
 
+import 'dart:typed_data';
+
 import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
 import 'package:gg_list/gg_list.dart';
@@ -11,16 +13,24 @@ import 'package:gg_list/gg_list.dart';
 /// A primitive to be rendered.
 class Primitive {
   /// Constructor
-  const Primitive({
+  Primitive({
     required this.name,
-    required this.indices,
-    required this.normals,
-    required this.positions,
-    required this.tangents,
-    required this.colors,
-    required this.textureCoordinates,
+    required List<int> indices,
+    required List<double> normals,
+    required List<double> positions,
+    required List<double> tangents,
+    required List<double> colors,
+    required List<double> textureCoordinates,
     this.mode = RenderModes.triangles,
-  });
+  })  : indices = GgIntList.fromList(indices, listType: Uint16List),
+        normals = GgFloatList.fromList(normals, listType: Float32List),
+        positions = GgFloatList.fromList(positions, listType: Float32List),
+        tangents = GgFloatList.fromList(tangents, listType: Float32List),
+        colors = GgFloatList.fromList(colors, listType: Float32List),
+        textureCoordinates = GgFloatList.fromList(
+          textureCoordinates,
+          listType: Float32List,
+        );
 
   /// The name of the primitive
   final String name;

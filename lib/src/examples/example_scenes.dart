@@ -32,4 +32,13 @@ class ExampleScenes {
           ExampleNodes.cuboid(),
         ]),
       );
+
+  /// Returns a scene with a parent node containing a child node showing
+  /// a triangle
+  static Scene parentWithChild() => Scene(
+        name: 'parentWithChild',
+        nodes: GgList.fromList([
+          ExampleNodes.parentWithChild(),
+        ]),
+      );
 }

@@ -18,8 +18,8 @@ class Scene {
   /// Scene constructor
   Scene({
     required this.name,
-    required this.nodes,
-  }) {
+    required List<Node> nodes,
+  }) : nodes = GgList.fromList(nodes) {
     _hashCode = name.hashCode ^ nodes.hashCode;
   }
 

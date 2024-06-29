@@ -25,4 +25,12 @@ class ExampleNodes {
         name: 'cuboid',
         mesh: ExampleMeshes.cuboid(),
       );
+
+  /// Returns a node with a child node showing a triangle
+  static Node parentWithChild() => Node(
+        name: 'parentWithChild',
+        children: [
+          triangle(),
+        ],
+      );
 }

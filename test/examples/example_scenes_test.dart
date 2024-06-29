@@ -14,6 +14,7 @@ void main() {
         expect(ExampleScenes.triangle(), isNotNull);
         expect(ExampleScenes.rectangle(), isNotNull);
         expect(ExampleScenes.cuboid(), isNotNull);
+        expect(ExampleScenes.parentWithChild(), isNotNull);
       });
     });
   });

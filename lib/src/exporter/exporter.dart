@@ -21,12 +21,32 @@ class Exporter {
   /// Creates a new [Exporter] instance.
   Exporter();
 
-  /// Exports the glTF asset to a json map.
-  Future<void> export({
+  /// Exports the glTF asset into a file
+  Future<void> exportToFile({
     required List<Scene> scenes,
     required String directory,
     required String name,
   }) async {
+    final json = export(scenes: scenes);
+
+    // Write the json to a file
+    final dirExists = await Directory(directory).exists() == true;
+    if (!dirExists) {
+      // coverage:ignore-start
+      await Directory(directory).create(recursive: true);
+      // coverage:ignore-end
+    }
+
+    final file = File('$directory/$name.gltf');
+    const jsonSerializer = JsonEncoder.withIndent('  ');
+    await file.writeAsString(jsonSerializer.convert(json));
+  }
+
+  // ...........................................................................
+  /// Exports the glTF asset to a json map.
+  Map<String, dynamic> export({
+    required List<Scene> scenes,
+  }) {
     final GltfJson json = GltfJson(
       asset: const AssetJson(
         version: '2.0',
@@ -55,17 +75,7 @@ class Exporter {
     _writeNodes(nodes, meshes, json);
     _writeScenes(scenes, nodes, json);
 
-    // Write the json to a file
-    final dirExists = await Directory(directory).exists() == true;
-    if (!dirExists) {
-      // coverage:ignore-start
-      await Directory(directory).create(recursive: true);
-      // coverage:ignore-end
-    }
-
-    final file = File('$directory/$name.gltf');
-    const jsonSerializer = JsonEncoder.withIndent('  ');
-    await file.writeAsString(jsonSerializer.convert(json));
+    return json.toJson();
   }
 
   // ######################
@@ -286,10 +296,6 @@ class Exporter {
     GgList<num> data,
     String type,
   ) {
-    if (type == 'indices') {
-      print(1);
-    }
-
     // Calc byte offset
     final byteOffset = objects.byteOffset;
     final componentTypeLength =
@@ -473,9 +479,12 @@ class Exporter {
       final meshIndex = mesh != null ? meshes.indexOf(mesh) : null;
       assert(meshIndex == null || meshIndex >= 0);
 
+      final childIndices = node.children.map((e) => nodes.indexOf(e)).toList();
+
       final nodeJson = NodeJson(
         name: node.name,
         mesh: meshIndex,
+        children: childIndices.isEmpty ? null : childIndices,
       );
 
       gltfJson.nodes.add(nodeJson);
