@@ -22,9 +22,9 @@ export 'src/json/node_json.dart';
 export 'src/json/primitive_json.dart';
 export 'src/json/scene_json.dart';
 
-export 'src/real/mesh.dart';
-export 'src/real/node.dart';
-export 'src/real/primitive.dart';
+export 'src/real/gltf_mesh.dart';
+export 'src/real/gltf_node.dart';
+export 'src/real/gltf_primitive.dart';
 export 'src/real/scene.dart';
 
 export 'src/exporter/exporter.dart';

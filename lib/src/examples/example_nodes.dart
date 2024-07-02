@@ -9,25 +9,25 @@ import 'package:gg_gltf/gg_gltf.dart';
 /// Example nodes for test purposes
 class ExampleNodes {
   /// Returns a triangle node
-  static Node triangle() => Node(
+  static GltfNode triangle() => GltfNode(
         name: 'triangle',
         mesh: ExampleMeshes.triangle(),
       );
 
   /// Returns a rectangle node
-  static Node rectangle() => Node(
+  static GltfNode rectangle() => GltfNode(
         name: 'rectangle',
         mesh: ExampleMeshes.rectangle(),
       );
 
   /// Returns a cuboid node
-  static Node cuboid() => Node(
+  static GltfNode cuboid() => GltfNode(
         name: 'cuboid',
         mesh: ExampleMeshes.cuboid(),
       );
 
   /// Returns a node with a child node showing a triangle
-  static Node parentWithChild() => Node(
+  static GltfNode parentWithChild() => GltfNode(
         name: 'parentWithChild',
         children: [
           triangle(),

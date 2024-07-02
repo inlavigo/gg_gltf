@@ -10,7 +10,7 @@ import 'package:gg_list/gg_list.dart';
 /// Example meshes for test purposes
 class ExampleMeshes {
   /// Returns a triangle mesh
-  static Mesh triangle() => Mesh(
+  static GltfMesh triangle() => GltfMesh(
         name: 'triangle',
         primitives: GgList.fromList([
           ExamplePrimitives.triangle(),
@@ -18,7 +18,7 @@ class ExampleMeshes {
       );
 
   /// Returns a rectangle mesh
-  static Mesh rectangle() => Mesh(
+  static GltfMesh rectangle() => GltfMesh(
         name: 'rectangle',
         primitives: GgList.fromList([
           ExamplePrimitives.rectangle(
@@ -32,7 +32,7 @@ class ExampleMeshes {
       );
 
   /// Returns a cuboid mesh
-  static Mesh cuboid() => Mesh(
+  static GltfMesh cuboid() => GltfMesh(
         name: 'cuboid',
         primitives: GgList.fromList([
           // Front side

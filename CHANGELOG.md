@@ -7,6 +7,7 @@
 - Add Json prefix to json classes
 - add real classes
 - Add examples
+- Add Gltf prefix to classes
 
 ### Changed
 

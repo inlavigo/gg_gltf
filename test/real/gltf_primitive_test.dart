@@ -14,7 +14,7 @@ void main() {
   group('Primitive', () {
     group('example', () {
       test('should work', () {
-        final primitive = Primitive.example;
+        final primitive = GltfPrimitive.example;
         expect(primitive, isNotNull);
         expect(
           primitive.indices,
@@ -89,7 +89,7 @@ void main() {
   });
 
   test('operator==, hashCode', () {
-    final a = Primitive(
+    final a = GltfPrimitive(
       name: 'a',
       indices: GgIntList.fromList(
         [0, 1, 2, 3, 4, 5],
@@ -117,7 +117,7 @@ void main() {
       ),
     );
 
-    final b = Primitive(
+    final b = GltfPrimitive(
       name: 'a',
       indices: GgIntList.fromList(
         [0, 1, 2, 3, 4, 5],
@@ -146,7 +146,7 @@ void main() {
     );
 
     const change = 0.0001;
-    final x = Primitive(
+    final x = GltfPrimitive(
       name: 'a',
       indices: GgIntList.fromList(
         [0, 1, 2, 3, 4, 5],

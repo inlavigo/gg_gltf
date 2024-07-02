@@ -12,7 +12,7 @@ import 'package:gg_list/gg_list.dart';
 /// Example primitives for test purposes
 class ExamplePrimitives {
   /// A simple triangle
-  static Primitive triangle() => Primitive(
+  static GltfPrimitive triangle() => GltfPrimitive(
         name: 'rectangle',
         indices: [
           /// Point 1
@@ -81,7 +81,7 @@ class ExamplePrimitives {
 
   // ...........................................................................
   /// A simple rectangle
-  static Primitive rectangle({
+  static GltfPrimitive rectangle({
     List<double> positions = const [
       /// Point 1
       0.0, 0.0, 0.0,
@@ -104,7 +104,7 @@ class ExamplePrimitives {
       2, 1, 3,
     ],
   }) =>
-      Primitive(
+      GltfPrimitive(
         name: 'rectangle',
         indices: GgIntList.fromList(
           indices,

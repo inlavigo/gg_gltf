@@ -8,11 +8,11 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:gg_list/gg_list.dart';
 
 /// The mesh is a collection of primitives to be rendered.
-class Mesh {
+class GltfMesh {
   /// Constructor
-  Mesh({
+  GltfMesh({
     required this.name,
-    required List<Primitive> primitives,
+    required List<GltfPrimitive> primitives,
   }) : primitives = GgList.fromList(primitives) {
     _hashCode = name.hashCode ^ primitives.hashCode;
   }
@@ -21,7 +21,7 @@ class Mesh {
   final String name;
 
   /// The primitives that make up the mesh.
-  final GgList<Primitive> primitives;
+  final GgList<GltfPrimitive> primitives;
 
   @override
   bool operator ==(Object other) => other.hashCode == hashCode;
@@ -30,10 +30,10 @@ class Mesh {
   int get hashCode => _hashCode;
 
   /// Example mesh
-  static final example = Mesh(
+  static final example = GltfMesh(
     name: 'example',
     primitives: GgList.fromList([
-      Primitive.example,
+      GltfPrimitive.example,
     ]),
   );
 

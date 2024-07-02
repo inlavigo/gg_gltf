@@ -21,8 +21,11 @@ class NodeJson {
   /// The mesh in this node.
   final int? mesh;
 
+  /// The translation of the node
+  final List<double>? translation;
+
   /// Node constructor
-  NodeJson({this.name, this.children, this.mesh}) {
+  NodeJson({this.name, this.children, this.mesh, this.translation}) {
     _hashCode = name.hashCode ^
         (children != null ? Object.hashAll(children!) : 0) ^
         mesh.hashCode;

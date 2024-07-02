@@ -12,6 +12,9 @@ NodeJson _$NodeJsonFromJson(Map<String, dynamic> json) => NodeJson(
           ?.map((e) => (e as num).toInt())
           .toList(),
       mesh: (json['mesh'] as num?)?.toInt(),
+      translation: (json['translation'] as List<dynamic>?)
+          ?.map((e) => (e as num).toDouble())
+          .toList(),
     );
 
 Map<String, dynamic> _$NodeJsonToJson(NodeJson instance) {
@@ -26,5 +29,6 @@ Map<String, dynamic> _$NodeJsonToJson(NodeJson instance) {
   writeNotNull('name', instance.name);
   writeNotNull('children', instance.children);
   writeNotNull('mesh', instance.mesh);
+  writeNotNull('translation', instance.translation);
   return val;
 }

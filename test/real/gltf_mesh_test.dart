@@ -11,13 +11,13 @@ import 'package:gg_list/gg_list.dart';
 import 'package:test/test.dart';
 
 void main() {
-  Mesh createMesh({bool withChange = false}) {
+  GltfMesh createMesh({bool withChange = false}) {
     final change = withChange ? 0.0001 : 0;
-    final x = Mesh(
+    final x = GltfMesh(
       name: 'a',
       primitives: GgList.fromList(
         [
-          Primitive(
+          GltfPrimitive(
             name: 'a',
             indices:
                 GgIntList.fromList([0, 1, 2, 3, 4, 5], listType: Uint16List),
@@ -52,7 +52,7 @@ void main() {
   group('Mesh', () {
     group('example', () {
       test('should work', () {
-        final mesh = Mesh.example;
+        final mesh = GltfMesh.example;
         expect(mesh, isNotNull);
       });
     });

@@ -39,7 +39,8 @@ class Exporter {
 
     final file = File('$directory/$name.gltf');
     const jsonSerializer = JsonEncoder.withIndent('  ');
-    await file.writeAsString(jsonSerializer.convert(json));
+    final jsonString = jsonSerializer.convert(json);
+    await file.writeAsString(jsonString);
   }
 
   // ...........................................................................
@@ -60,9 +61,9 @@ class Exporter {
     );
 
     final buffers = _Objects();
-    final primitives = <Primitive>[];
-    final meshes = <Mesh>[];
-    final nodes = <Node>[];
+    final primitives = <GltfPrimitive>[];
+    final meshes = <GltfMesh>[];
+    final nodes = <GltfNode>[];
 
     _collectPrimitives(primitives, scenes);
     _collectMeshes(meshes, scenes);
@@ -83,7 +84,7 @@ class Exporter {
   // ######################
 
   // ...........................................................................
-  void _collectPrimitives(List<Primitive> primitives, List<Scene> scenes) {
+  void _collectPrimitives(List<GltfPrimitive> primitives, List<Scene> scenes) {
     for (final scene in scenes) {
       for (final node in scene.nodes) {
         _collectPrimitivesForNode(primitives, node);
@@ -93,8 +94,8 @@ class Exporter {
 
   // ...........................................................................
   void _collectPrimitivesForNode(
-    List<Primitive> primitives,
-    Node node,
+    List<GltfPrimitive> primitives,
+    GltfNode node,
   ) {
     for (final child in node.children) {
       _collectPrimitivesForNode(primitives, child); // coverage:ignore-line
@@ -108,7 +109,7 @@ class Exporter {
   // ...........................................................................
   void _collectBuffersAndAccessors(
     GltfJson gltfJson,
-    List<Primitive> primitives,
+    List<GltfPrimitive> primitives,
     _Objects buffers,
   ) {
     for (final primitive in primitives) {
@@ -119,7 +120,7 @@ class Exporter {
   // ...........................................................................
   void _collectNodes(
     List<Scene> scenes,
-    List<Node> nodes,
+    List<GltfNode> nodes,
   ) {
     for (final scene in scenes) {
       for (final node in scene.nodes) {
@@ -130,8 +131,8 @@ class Exporter {
 
   // ...........................................................................
   void _collectNodesForNode(
-    Node node,
-    List<Node> nodes,
+    GltfNode node,
+    List<GltfNode> nodes,
   ) {
     final existingNode = nodes.firstWhereOrNull(
       (element) => element.hashCode == node.hashCode, // coverage:ignore-line
@@ -149,7 +150,7 @@ class Exporter {
 
   // ...........................................................................
   void _collectPrimitiveBufferAndAccessor(
-    Primitive primitive,
+    GltfPrimitive primitive,
     _Objects objects,
   ) {
     _collectData(primitive.indices, objects, 'indices', primitive);
@@ -178,7 +179,7 @@ class Exporter {
     GgList<num> data,
     _Objects objects,
     String type,
-    Primitive primitive,
+    GltfPrimitive primitive,
   ) {
     // Check
     assert(data.data is TypedData);
@@ -202,7 +203,7 @@ class Exporter {
     _Objects objects,
     String type,
     GgList<num> data,
-    Primitive primitive,
+    GltfPrimitive primitive,
     int stride,
   ) {
     final gltfType = switch (type) {
@@ -382,7 +383,7 @@ class Exporter {
 
   // ...........................................................................
   void _collectMeshes(
-    List<Mesh> meshes,
+    List<GltfMesh> meshes,
     List<Scene> scenes,
   ) {
     for (final scene in scenes) {
@@ -394,8 +395,8 @@ class Exporter {
 
   // ...........................................................................
   void _collectMeshesForNode(
-    List<Mesh> meshes,
-    Node node,
+    List<GltfMesh> meshes,
+    GltfNode node,
   ) {
     for (final child in node.children) {
       _collectMeshesForNode(meshes, child); // coverage:ignore-line
@@ -418,7 +419,7 @@ class Exporter {
   // ...........................................................................
   void _writeMeshes(
     _Objects objects,
-    List<Mesh> meshes,
+    List<GltfMesh> meshes,
     GltfJson gltfJson,
   ) {
     for (final mesh in meshes) {
@@ -465,8 +466,8 @@ class Exporter {
 
   // ...........................................................................
   void _writeNodes(
-    List<Node> nodes,
-    List<Mesh> meshes,
+    List<GltfNode> nodes,
+    List<GltfMesh> meshes,
     GltfJson gltfJson,
   ) {
     for (final node in nodes) {
@@ -485,6 +486,7 @@ class Exporter {
         name: node.name,
         mesh: meshIndex,
         children: childIndices.isEmpty ? null : childIndices,
+        translation: node.translation,
       );
 
       gltfJson.nodes.add(nodeJson);
@@ -494,7 +496,7 @@ class Exporter {
   // ...........................................................................
   void _writeScenes(
     List<Scene> scenes,
-    List<Node> nodes,
+    List<GltfNode> nodes,
     GltfJson gltfJson,
   ) {
     for (final scene in scenes) {
@@ -549,7 +551,7 @@ class _PrimitiveAccessor {
     required this.type,
   });
 
-  final Primitive primitive;
+  final GltfPrimitive primitive;
   final AccessorJson accessor;
   final int accessorIndex;
   final String type;

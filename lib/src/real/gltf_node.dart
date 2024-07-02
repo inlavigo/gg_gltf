@@ -6,32 +6,36 @@
 
 import 'package:collection/collection.dart';
 import 'package:gg_gltf/gg_gltf.dart';
-import 'package:gg_gltf/src/real/mesh.dart';
+import 'package:gg_gltf/src/real/gltf_mesh.dart';
 
 /// A node in a gltf file
-class Node {
+class GltfNode {
   /// Constructor
-  const Node({
+  const GltfNode({
     required this.name,
     this.children = const [],
     this.mesh,
+    this.translation,
   });
 
   /// The name of the node
   final String name;
 
   /// The children of the node
-  final List<Node> children;
+  final List<GltfNode> children;
 
   /// The mesh of the node
-  final Mesh? mesh;
+  final GltfMesh? mesh;
+
+  /// The translation of the node
+  final List<double>? translation;
 
   @override
   bool operator ==(Object other) {
-    if (other is! Node) return false;
-    Node node = other;
+    if (other is! GltfNode) return false;
+    GltfNode node = other;
     return node.name == name &&
-        const ListEquality<Node>().equals(node.children, children) &&
+        const ListEquality<GltfNode>().equals(node.children, children) &&
         node.mesh == mesh;
   }
 
@@ -39,8 +43,8 @@ class Node {
   int get hashCode => name.hashCode ^ Object.hashAll(children) ^ mesh.hashCode;
 
   /// Example node for test purposes
-  static final example = Node(
+  static final example = GltfNode(
     name: 'example',
-    mesh: Mesh.example,
+    mesh: GltfMesh.example,
   );
 }

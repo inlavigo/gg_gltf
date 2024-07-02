@@ -10,7 +10,7 @@ import 'package:gg_list/gg_list.dart';
 /// The root nodes of a scene.
 class Scene {
   /// The root nodes of a scene.
-  final GgList<Node> nodes;
+  final GgList<GltfNode> nodes;
 
   /// The name of the scene
   final String name;
@@ -18,7 +18,7 @@ class Scene {
   /// Scene constructor
   Scene({
     required this.name,
-    required List<Node> nodes,
+    required List<GltfNode> nodes,
   }) : nodes = GgList.fromList(nodes) {
     _hashCode = name.hashCode ^ nodes.hashCode;
   }
@@ -34,7 +34,7 @@ class Scene {
   static Scene example = Scene(
     name: 'exampleScene',
     nodes: GgList.fromList([
-      Node.example,
+      GltfNode.example,
     ]),
   );
 

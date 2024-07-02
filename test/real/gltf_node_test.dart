@@ -8,7 +8,7 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final gltfNode = Node.example;
+  final gltfNode = GltfNode.example;
   group('GltfNode', () {
     group('example', () {
       test('should work', () {
@@ -17,10 +17,10 @@ void main() {
     });
 
     test('operator==, hashCode', () {
-      const c = Node(name: 'c');
-      final a = Node(name: 'a', children: [c], mesh: Mesh.example);
-      final b = Node(name: 'a', children: [c], mesh: Mesh.example);
-      final x = Node(name: 'x', children: [c], mesh: Mesh.example);
+      const c = GltfNode(name: 'c');
+      final a = GltfNode(name: 'a', children: [c], mesh: GltfMesh.example);
+      final b = GltfNode(name: 'a', children: [c], mesh: GltfMesh.example);
+      final x = GltfNode(name: 'x', children: [c], mesh: GltfMesh.example);
 
       expect(a, equals(b));
       expect(a.hashCode, equals(b.hashCode));

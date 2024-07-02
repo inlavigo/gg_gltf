@@ -11,9 +11,9 @@ import 'package:gg_gltf/gg_gltf.dart';
 import 'package:gg_list/gg_list.dart';
 
 /// A primitive to be rendered.
-class Primitive {
+class GltfPrimitive {
   /// Constructor
-  Primitive({
+  GltfPrimitive({
     required this.name,
     required List<int> indices,
     required List<double> normals,
@@ -58,8 +58,8 @@ class Primitive {
 
   @override
   bool operator ==(Object other) {
-    if (other is! Primitive) return false;
-    Primitive primitive = other;
+    if (other is! GltfPrimitive) return false;
+    GltfPrimitive primitive = other;
     return primitive.name == name &&
         primitive.mode == mode &&
         const ListEquality<int>().equals(primitive.indices, indices) &&

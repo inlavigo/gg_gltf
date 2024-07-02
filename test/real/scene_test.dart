@@ -18,9 +18,18 @@ void main() {
     });
 
     test('hashCode, operator==', () {
-      final a = Scene(name: 'a', nodes: GgList<Node>.fromList([Node.example]));
-      final a1 = Scene(name: 'a', nodes: GgList<Node>.fromList([Node.example]));
-      final x = Scene(name: 'x', nodes: GgList<Node>.fromList([Node.example]));
+      final a = Scene(
+        name: 'a',
+        nodes: GgList<GltfNode>.fromList([GltfNode.example]),
+      );
+      final a1 = Scene(
+        name: 'a',
+        nodes: GgList<GltfNode>.fromList([GltfNode.example]),
+      );
+      final x = Scene(
+        name: 'x',
+        nodes: GgList<GltfNode>.fromList([GltfNode.example]),
+      );
       expect(a1, a);
       expect(a1.hashCode, a.hashCode);
       expect(a1, isNot(x));
